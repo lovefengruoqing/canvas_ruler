@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Horizontal Ruler</title>
+</head>
+<body>
+  <canvas class="root"></canvas>
+  <script type="module">
+    import Ruler from '../dist/ruler.module.js';
+
+    let ruler = new Ruler({
+      canvasId: '.root'
+    }).render();
+  </script>
+</body>
+</html>
