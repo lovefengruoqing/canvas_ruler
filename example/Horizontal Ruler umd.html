@@ -3,16 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Horizontal Ruler</title>
+    <title>Horizontal Ruler umd</title>
+    <script src="../dist/ruler.umd.js"></script>
   </head>
   <body>
     <canvas class="root"></canvas>
-    <script type="module">
-      import { Ruler, version } from "../dist/ruler.module.js";
+    <script>
+      console.log(canvasRuler.version);
 
-      console.log(version);
-
-      let ruler = new Ruler({
+      let ruler = new canvasRuler.Ruler({
         canvasId: ".root",
         width: 1000,
         scale: 10,
