@@ -11,6 +11,8 @@ export default class Ruler {
     return this.config.canvas;
   }
 
+  animateTimer: number
+
   /**
    * default config
    */
@@ -36,6 +38,9 @@ export default class Ruler {
     this.resize();
   }
 
+  /**
+   * resize the base canvas
+   */
   resize(): Ruler {
     const { config } = this;
     const { canvas, width, height } = config;
@@ -54,9 +59,36 @@ export default class Ruler {
 
   /** update the config of the ruler and refresh it */
   update(config: configInterface): Ruler {
+    const { scale } = this.config;
     Object.assign(this.config, config);
     if (config.width || config.height) this.resize();
-    return this.render();
+    if (config.scale) {
+      this.addAnimate({ type: 'scale', from: scale, to: config.scale });
+    } else {
+      this.render();
+    }
+    return this;
+  }
+
+  addAnimate({ type, from, to }:{type:string, from: number, to: number}): Ruler {
+    if (type === 'scale') {
+      let cur = from;
+      const sign = Math.sign(to - from);
+      const doAnimate = () => {
+        cur += sign * 0.01;
+        Object.assign(this.config, { scale: cur });
+        this.render();
+
+        if ((to - cur) * sign >= 0) {
+          this.animateTimer = requestAnimationFrame(doAnimate);
+        }
+      };
+
+
+      this.animateTimer = requestAnimationFrame(doAnimate);
+    }
+
+    return this;
   }
 
   /** befroe render the ruler */

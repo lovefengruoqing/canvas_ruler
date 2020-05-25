@@ -1,0 +1,38 @@
+# 将所有的纯文本文件末尾改成 Unix 风格的 lf
+* text eol=lf
+
+# 排除掉非纯文本文件
+*.jpg -text
+*.png -text
+*.webp -text
+*.exe -text
+*.icon -text
+*.gif -text
+*.pdf -text
+*.doc -text
+*.mtl -text
+*.obj -text
+*.gltf -text
+*.bmp -text
+*.tiff -text
+*.pcx -text
+*.tga -text
+*.exif -text
+*.fpx -text
+*.svg -text
+*.psd -text
+*.cdr -text
+*.pcd -text
+*.dxf -text
+*.ufo -text
+*.eps -text
+*.ai -text
+*.raw -text
+*.WMF -text
+*.JPEG -text
+*.eot -text
+*.ttf -text
+*.woff -text
+*.woff2 -text
+*.bin -text
+*.mp4 -text
