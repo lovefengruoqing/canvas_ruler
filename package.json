@@ -6,6 +6,7 @@
   "main": "dist/ruler.js",
   "module": "dist/ruler.module.js",
   "unpkg": "dist/ruler.umd.js",
+  "files": ["dist", "src", "package.json", "README.md", "LICENSE"],
   "scripts": {
     "build": "microbundle",
     "dev": "microbundle watch",
