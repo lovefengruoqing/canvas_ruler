@@ -72,6 +72,10 @@ export interface configInterface {
 
   /** the sceen pixel value of the each interval when the scale is 1 */
   base?: number;
+
+
+  /** the origin of the ruler offset */
+  originOffset: number;
 }
 
 type ArrayLengthMutationKeys = 'splice' | 'push' | 'pop' | 'shift' | 'unshift'

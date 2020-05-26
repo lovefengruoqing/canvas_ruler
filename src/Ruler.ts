@@ -32,6 +32,7 @@ export default class Ruler {
     beginOffset: 0,
     endOffset: 0,
     base: 10,
+    originOffset: 10,
   };
 
   constructor(config?: configInterface) {
@@ -124,7 +125,7 @@ export default class Ruler {
     const ctx = this.canvas.getContext('2d');
     const { width, height } = this.canvas;
     const {
-      lineWidth, scale, color, beginOffset, endOffset, base, labelScale,
+      lineWidth, scale, color, beginOffset, endOffset, base, labelScale, originOffset,
     } = this.config;
 
     /** each space of scale on the screen */
@@ -140,7 +141,8 @@ export default class Ruler {
     ]);
 
     const splitLine: Array<Array<Point>> = [];
-    let cur = beginOffset;
+    const ZeroPos = beginOffset + originOffset * labelScale;
+    let cur = ZeroPos;
     let count = 0;
     while (cur < width - endOffset) {
       // if ((es <= 5 && count % 5 === 0) || es > 5) {
