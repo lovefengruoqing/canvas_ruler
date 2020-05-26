@@ -1,6 +1,6 @@
 {
   "name": "canvas_ruler",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "a simple canvas ruler",
   "source": "src/main.ts",
   "main": "dist/ruler.js",
