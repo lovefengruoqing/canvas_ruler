@@ -1,12 +1,18 @@
 {
   "name": "canvas_ruler",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "a simple canvas ruler",
   "source": "src/main.ts",
   "main": "dist/ruler.js",
   "module": "dist/ruler.module.js",
   "unpkg": "dist/ruler.umd.js",
-  "files": ["dist", "src", "package.json", "README.md", "LICENSE"],
+  "files": [
+    "dist",
+    "src",
+    "package.json",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "microbundle",
     "dev": "microbundle watch",
