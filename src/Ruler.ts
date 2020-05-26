@@ -32,7 +32,7 @@ export default class Ruler {
     beginOffset: 0,
     endOffset: 0,
     base: 10,
-    originOffset: 10,
+    originOffset: 0,
   };
 
   constructor(config?: configInterface) {

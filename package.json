@@ -26,6 +26,7 @@
     "url": "https://github.com/lovefengruoqing/canvas_ruler/issues"
   },
   "homepage": "https://github.com/lovefengruoqing/canvas_ruler#readme",
+  "typings": "dist/src/main.d.ts",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^3.0.0",
     "@typescript-eslint/parser": "^3.0.0",
