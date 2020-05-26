@@ -21,15 +21,17 @@ export default class Ruler {
     height: 24,
     color: '#000',
     background: '#fff',
-    labelColor: '#red',
+    labelColor: '#345',
     labelFontSize: 10,
     labelFontFamily: 'Arial',
     lineWidth: 1,
     scale: 1,
+    labelScale: 10,
     canvas: document.createElement('canvas'),
     start: 0,
     beginOffset: 0,
     endOffset: 0,
+    base: 10,
   };
 
   constructor(config?: configInterface) {
@@ -74,8 +76,16 @@ export default class Ruler {
     if (type === 'scale') {
       let cur = from;
       const sign = Math.sign(to - from);
-      const doAnimate = () => {
-        cur += sign * 0.01;
+
+      let start: number | null;
+      // let elapsed:number;
+
+      const doAnimate = (timestamp:number) => {
+        if (!start) start = timestamp;
+        // elapsed = timestamp - start;
+        // console.log(elapsed);
+
+        cur += sign * 0.02;
         Object.assign(this.config, { scale: cur });
         this.render();
 
@@ -114,13 +124,14 @@ export default class Ruler {
     const ctx = this.canvas.getContext('2d');
     const { width, height } = this.canvas;
     const {
-      lineWidth, scale, color, beginOffset, endOffset,
+      lineWidth, scale, color, beginOffset, endOffset, base, labelScale,
     } = this.config;
 
     /** each space of scale on the screen */
-    const es = 10 * scale;
+    const es = base * scale;
 
     const pointsArr: Array<Array<Point>> = [];
+    const LabelArr = [];
 
     /** draw the baseLine of the ruler */
     pointsArr.push([
@@ -132,11 +143,21 @@ export default class Ruler {
     let cur = beginOffset;
     let count = 0;
     while (cur < width - endOffset) {
+      // if ((es <= 5 && count % 5 === 0) || es > 5) {
       const from: Point = [cur - lineWidth / 2, height];
       // eslint-disable-next-line no-nested-ternary
       const ty = count % 5 ? height / 2 : (count % 10 ? height / 3 : 0);
       const to: Point = [cur - lineWidth / 2, ty];
       splitLine.push([from, to]);
+
+      if (count % 5 === 0) {
+        LabelArr.push({
+          point: to,
+          text: String((count * base) / labelScale),
+          type: count % 2,
+        });
+        // }
+      }
 
       cur += es;
       count += 1;
@@ -159,6 +180,12 @@ export default class Ruler {
     ctx.stroke();
     ctx.restore();
 
+    ctx.save();
+    LabelArr.forEach(({ point, text, type }) => {
+      this.renderLabel(text, point[0], point[1], type);
+    });
+    ctx.restore();
+
     return this;
   }
 
@@ -172,11 +199,33 @@ export default class Ruler {
   /**
    * render the label of the ruler
    */
-  renderLabel(text: string, x: number, y: number): Ruler {
-    const { canvas, labelFontSize, labelFontFamily } = this.config;
+  renderLabel(text: string, x: number, y: number, type: number): Ruler {
+    const { canvas, labelFontFamily, labelColor } = this.config;
+    let { labelFontSize } = this.config;
     const ctx = canvas.getContext('2d');
+    let textBaseline:CanvasTextBaseline;
+    let textAlign:CanvasTextAlign;
+    switch (type) {
+      case 0:
+        textBaseline = 'top';
+        textAlign = 'left';
+        x += 1;
+        break;
+      case 1:
+        textBaseline = 'middle';
+        textAlign = 'left';
+        x += 1;
+        y -= 1;
+        labelFontSize -= 1;
+        break;
+
+      default:
+        break;
+    }
+    ctx.textBaseline = textBaseline;
+    ctx.textAlign = textAlign;
     ctx.font = `${labelFontSize}px ${labelFontFamily}`;
-    ctx.fillStyle = '#345';
+    ctx.fillStyle = labelColor;
     ctx.fillText(text, x, y);
     return this;
   }

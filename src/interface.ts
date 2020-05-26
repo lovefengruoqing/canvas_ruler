@@ -50,19 +50,28 @@ export interface configInterface {
    * the split line width
    */
   lineWidth?: number;
+
   /**
    * the scale of the ruler
    */
   scale?: number;
 
+  /**
+   * the scale of the label
+   */
+  labelScale?: number;
+
   /** the start scale of the ruler */
-  start?: number,
+  start?: number;
 
   /** the start of the ruler scale offset */
-  beginOffset?: number,
+  beginOffset?: number;
 
   /** the end of the ruler scale offset */
-  endOffset?: number,
+  endOffset?: number;
+
+  /** the sceen pixel value of the each interval when the scale is 1 */
+  base?: number;
 }
 
 type ArrayLengthMutationKeys = 'splice' | 'push' | 'pop' | 'shift' | 'unshift'
