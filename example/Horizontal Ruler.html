@@ -3,14 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="">
+    <link rel="shortcut icon" href="" />
     <title>Horizontal Ruler</title>
   </head>
   <body>
     <div>
-      <label for="scale">Scale: <span>1</span></label>
-      <input type="range" id="scale" value="1" name="scale" min="0.1" max="10" step="0.1">
+      <label for="scale">Scale: <span class="currentScale">1</span></label>
+      <input
+        type="range"
+        id="scale"
+        value="1"
+        name="scale"
+        min="0.1"
+        max="10"
+        step="0.1"
+      />
     </div>
+    <div>
+      <label for="originOffset">OriginOffset: </label>
+      <input type="number" id="originOffset" value="0" name="originOffset" />
+    </div>
+    <br />
     <canvas class="root"></canvas>
     <script type="module">
       import { Ruler, version } from "../dist/ruler.module.js";
@@ -22,6 +35,27 @@
         width: 1000,
         scale: 1,
       }).render();
+
+      let scaleDom = document.querySelector("#scale");
+      let currentScale = scaleDom.previousElementSibling.querySelector(
+        ".currentScale"
+      );
+      scaleDom.addEventListener("change", (e) => {
+        let scale = parseFloat(e.target.value);
+        currentScale.innerHTML = scale;
+        // console.log(scale)
+        ruler.update({
+          scale,
+        });
+      });
+
+      let originOffsetDom = document.querySelector("#originOffset");
+      originOffsetDom.addEventListener("change", (e) => {
+        let originOffset = e.target.value;
+        ruler.update({
+          originOffset: parseFloat(originOffset),
+        });
+      });
     </script>
   </body>
 </html>

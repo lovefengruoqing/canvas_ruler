@@ -81,16 +81,17 @@ export default class Ruler {
       let start: number | null;
       // let elapsed:number;
 
+      cancelAnimationFrame(this.animateTimer);
+
       const doAnimate = (timestamp:number) => {
         if (!start) start = timestamp;
         // elapsed = timestamp - start;
         // console.log(elapsed);
 
-        cur += sign * 0.02;
-        Object.assign(this.config, { scale: cur });
-        this.render();
-
+        cur = parseFloat((cur + sign * 0.02).toFixed(2));
         if ((to - cur) * sign >= 0) {
+          Object.assign(this.config, { scale: cur });
+          this.render();
           this.animateTimer = requestAnimationFrame(doAnimate);
         }
       };
