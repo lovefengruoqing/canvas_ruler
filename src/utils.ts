@@ -1,5 +1,6 @@
 import * as packageConfig from '../package.json';
 
-export default 'utls module';
+export default 'utils module';
 
-export const { version } = packageConfig;
+const { version: v, name: n } = packageConfig;
+export const version = `${n} version: ${v}`;

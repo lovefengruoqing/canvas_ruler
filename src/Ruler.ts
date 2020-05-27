@@ -143,9 +143,32 @@ export default class Ruler {
     const splitLine: Array<Array<Point>> = [];
     const ZeroPos = beginOffset + originOffset * labelScale;
     let cur = ZeroPos;
+
     let count = 0;
+    // left
+    while (cur > beginOffset) {
+      const from: Point = [cur - lineWidth / 2, height];
+      // eslint-disable-next-line no-nested-ternary
+      const ty = count % 5 ? height / 2 : (count % 10 ? height / 3 : 0);
+      const to: Point = [cur - lineWidth / 2, ty];
+
+      splitLine.push([from, to]);
+
+      if (count % 5 === 0) {
+        LabelArr.push({
+          point: to,
+          text: String(-(count * base) / labelScale),
+          type: count % 2,
+        });
+      }
+
+      cur -= es;
+      count += 1;
+    }
+
+    cur = ZeroPos + es;
+    count = 1;
     while (cur < width - endOffset) {
-      // if ((es <= 5 && count % 5 === 0) || es > 5) {
       const from: Point = [cur - lineWidth / 2, height];
       // eslint-disable-next-line no-nested-ternary
       const ty = count % 5 ? height / 2 : (count % 10 ? height / 3 : 0);
@@ -158,7 +181,6 @@ export default class Ruler {
           text: String((count * base) / labelScale),
           type: count % 2,
         });
-        // }
       }
 
       cur += es;
