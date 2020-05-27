@@ -2,7 +2,7 @@
 
 A very simpler canvas ruler, you can easily use with just one line.
 
-[![npm](https://img.shields.io/npm/v/canvas_ruler.svg?style=flat-square)](https://www.npmjs.org/package/canvas_ruler)
+[![npm](https://img.shields.io/npm/v/canvas_ruler)](https://www.npmjs.org/package/canvas_ruler)
 [![install size](https://packagephobia.now.sh/badge?p=canvas_ruler)](https://packagephobia.now.sh/result?p=canvas_ruler)
 ![npm bundle size](https://img.shields.io/bundlephobia/min/canvas_ruler)
 ![GitHub top language](https://img.shields.io/github/languages/top/lovefengruoqing/canvas_ruler)
